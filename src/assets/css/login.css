@@ -1,0 +1,80 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f4f6; 
+}
+
+.signup {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 425px;
+}
+
+.title_signup {
+  text-align: center;
+  padding: 45px;
+  font-weight: bold;
+  font-size: 34px;
+  font-weight: 500;
+
+}
+
+.login, .parol {
+  margin-bottom: 30px;
+}
+
+.login_name, .parol_name {
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.sing_btn button{
+  width: 100%;
+  outline: none;
+  background-color: #1A6291;
+  text-align: center;
+  margin-top: 50px;
+  border: none;
+  padding: 4px;
+  font-size: 16px ;
+  border-radius: 6px;
+}
+
+
+
+/* Mobil uchun media query (ixtiyoriy) */
+@media (max-width: 480px) {
+  .container{
+     padding: 0px 20px;
+  }
+     .signup {
+    padding: 20px;
+  }
+
+  .title_signup {
+    font-size: 20px;
+  }
+
+  input {
+    padding: 9px;
+  }
+
+  .sing_btn a {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

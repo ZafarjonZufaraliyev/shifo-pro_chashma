@@ -1,0 +1,123 @@
+.register-container {
+   max-width: 1200px;
+  margin: 20px auto; 
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  color: #222;
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #154a7d;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ismfamilya {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ismfamilya input {
+  flex: 1;
+  min-width: 30%;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+  padding: 14px 18px;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #fefefe;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #1a6291;
+  box-shadow: 0 0 6px rgba(26, 98, 145, 0.2);
+  outline: none;
+}
+
+.submit-btn {
+  background-color: #1a6291;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 12px rgba(26, 98, 145, 0.4);
+}
+
+.submit-btn:hover {
+  background-color: #124766;
+  box-shadow: 0 8px 18px rgba(18, 71, 102, 0.6);
+}
+
+/* Pasport va Tug‘ilgan sana qatori */
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-row .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Responsive dizayn */
+@media (max-width: 992px) {
+  .ismfamilya {
+    flex-direction: column;
+  }
+
+  .submit-btn {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 600px) {
+  .register-container {
+    padding: 25px 20px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}
+@media (max-width: 768px) {
+  .register-container {
+    margin-left: 0;
+    padding: 20px;
+  }
+}
