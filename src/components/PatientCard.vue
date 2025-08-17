@@ -190,18 +190,18 @@ export default {
 
       activeTab: 'xizmatlar',
 
-      // Yangi xizmat qo‘shish uchun forma
+      // yangi xizmat formasi
       newService: { service_id: '', sana: '' },
 
-      // Qayta ro‘yxatga olish formasi
+      // qayta ro‘yxatga olish formasi
       rr: {
         kirish_sanasi: '',
         chiqish_sanasi: '',
         xona_id: '',
         xizmatlar: [],
         price: 0,
-        has_child: false,   // bola bor/yo‘qligi
-        num_child: 0,       // bola soni
+        has_child: false,
+        num_child: 0,
       },
 
       role: localStorage.getItem('role') || 'mini',
@@ -280,8 +280,7 @@ export default {
         return;
       }
       const roomType = this.availableRoomTypes.find(rt => String(rt.id) === String(selectedRoom.room_type_id));
-      const pricePerDay = Number(roomType?.Narxi || roomType?.price || 0);
-      this.rr.price = pricePerDay;
+      this.rr.price = Number(roomType?.Narxi || roomType?.price || 0);
     }
   },
 
@@ -349,7 +348,7 @@ export default {
         });
       } catch (err) {
         console.error('❌ Xatolik fetchAll() da:', err);
-        alert('Ma\'lumotlarni yuklashda xatolik yuz berdi');
+        alert('Maʼlumotlarni yuklashda xatolik yuz berdi');
       } finally {
         this.loading = false;
       }
@@ -427,16 +426,14 @@ export default {
 
     async submitReRegister() {
       const r = this.rr;
-
       if (!r.kirish_sanasi || !r.chiqish_sanasi || !r.xona_id) {
-        alert('❗ Barcha maydonlar toʻldirilishi kerak');
-        return;
+        return alert('❗ Barcha maydonlar toʻldirilishi kerak');
       }
 
       try {
         let stay = this.latestStay;
 
-        // Agar oxirgi davolanish yopilgan bo‘lsa, yangi davolanish yaratish
+        // agar oxirgi davolanish yopilgan bo‘lsa, yangi yaratish
         if (!stay || stay.ketish_sanasi || stay.to_date) {
           const { data: newStayResponse } = await api.post('/api/v1/davolanish', {
             client_id: this.patient.id,
@@ -448,14 +445,10 @@ export default {
           stay = newStayResponse.data || newStayResponse;
         }
 
-        // Oxirgi xona joylashuvini ketish sanasini yangilash
+        // eski xona yopish
         const lastRoom = [...this.roomAssignments]
           .filter((ra) => ra.davolanish_id === stay.id)
-          .sort(
-            (a, b) =>
-              new Date(b.kirish_sanasi || b.from_date) -
-              new Date(a.kirish_sanasi || a.from_date)
-          )[0];
+          .sort((a, b) => new Date(b.kirish_sanasi || b.from_date) - new Date(a.kirish_sanasi || a.from_date))[0];
 
         if (lastRoom) {
           await api.put(`/api/v1/xona-joylashuv/${lastRoom.id}`, {
@@ -464,10 +457,10 @@ export default {
           });
         }
 
-        // Yangi xona joylashuvini yaratish, HAS_CHILD va NUM_CHILD ham yuboriladi
+        // yangi xona qo‘shish
         await api.post('/api/v1/xona-joylashuv', {
           davolanish_id: stay.id,
-          room_id: r.xona_id, // room_id API parametri ekaniga e'tibor bering
+          room_id: r.xona_id,
           from_date: r.kirish_sanasi,
           to_date: r.chiqish_sanasi,
           price_per_day: r.price || 0,
@@ -475,7 +468,7 @@ export default {
           num_child: r.num_child || 0,
         });
 
-        // Xizmatlar qo‘shish
+        // xizmatlar qo‘shish
         for (const sid of r.xizmatlar) {
           const s = this.allServices.find((srv) => srv.id === sid);
           await api.post('/api/v1/client-services', {
@@ -487,7 +480,7 @@ export default {
           });
         }
 
-        // Forma maydonlarini tozalash
+        // formani tozalash
         this.rr = {
           kirish_sanasi: '',
           chiqish_sanasi: '',
@@ -511,6 +504,7 @@ export default {
   },
 };
 </script>
+
 
 
 

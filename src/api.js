@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://chashma.shifo-pro.uz',
+  baseURL: 'https://chashma.shifo-pro.uz',
   headers: {
     "Content-Type": "application/json",
     "Accept": "application/json"
